@@ -1,4 +1,8 @@
-﻿namespace Topic_6_loops
+﻿using System.ComponentModel.Design;
+using System.Security.Cryptography.X509Certificates;
+using System.Transactions;
+
+namespace Topic_6_loops
 {
     internal class Program
     {
@@ -69,12 +73,14 @@
         public static void BankOfBlorb()
         {
             string bankchoice;
+            double balance = 150, depositAmount;
+
 
             Console.WriteLine("You chose option 2");
             Console.WriteLine("Hit ENTER to continue.");
             Console.Clear();
 
-            Console.WriteLine("Your current account balance: $150 Bolorian dollars");
+            Console.WriteLine("Welcome to the Bank of Blorb");
             Console.WriteLine();
             Console.WriteLine("You'll be charged $0.75 with each transaction");
             Console.WriteLine();
@@ -86,19 +92,25 @@
             Console.WriteLine("Withdrawal");
             Console.WriteLine("Bill payment");
             Console.WriteLine("Account balance update");
-            Console.WriteLine("Q");
+            Console.WriteLine("Quit");
 
             bankchoice = Console.ReadLine().ToLower().Trim();
             Console.WriteLine();
-            if (bankchoice == "")
+            if (bankchoice == "deposit")
             {
-                
+                Console.WriteLine("Enter the amount you wish to deposit: ");
+                while (double.TryParse(Console.ReadLine(), out depositAmount) || depositAmount > 0)
+                    Console.WriteLine("Invalid number: you have $150 in your account");
+                if (amount > 0 || amount > 150)
+                    currentamount = amount - 0.75;
+                Console.WriteLine(value: $"your current amount {currentamount}");
+                Console.WriteLine("");
             }
-            else if (choose == "2")
+            else if (bankchoice == "withdrawal")
             {
 
-
                 
+
 
             }
             // Add an else if for each valid choice...
@@ -107,16 +119,28 @@
                 Console.WriteLine("Invalid choice, press ENTER to continue.");
                 Console.ReadLine();
             }
+        }
 
 
+        public static void Transaction()
+        {
+            int amount;
+            double currentamount = 0;
+            
 
-
-
-
-
-
-
+            
 
         }
+            
+            
+
+
+
+
+
+
+
+
+        
     }
 }
