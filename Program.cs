@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.Design;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.Transactions;
 
 namespace Topic_6_loops
@@ -9,6 +11,7 @@ namespace Topic_6_loops
         static void Main(string[] args)
         {
             string choice = "";
+            Die die1;
 
             while (choice != "q")
             {
@@ -17,6 +20,7 @@ namespace Topic_6_loops
                 Console.WriteLine();
                 Console.WriteLine("1 - Prompter");
                 Console.WriteLine("2 - Bank of Blorb");
+                Console.WriteLine("3 - Doubles Roller");
                 Console.WriteLine("Q - Quit");
                 Console.WriteLine();
                 choice = Console.ReadLine().ToLower().Trim();
@@ -27,12 +31,17 @@ namespace Topic_6_loops
                 }
                 else if (choice == "2")
                 {
-                    
 
-                   BankOfBlorb();
+
+                    BankOfBlorb();
 
                 }
-                // Add an else if for each valid choice...
+                else if (choice == "3")
+                {
+                    DoublesRoller();
+
+                }
+                
                 else
                 {
                     Console.WriteLine("Invalid choice, press ENTER to continue.");
@@ -40,7 +49,28 @@ namespace Topic_6_loops
                 }
             }
 
-            
+
+
+        }
+        public static void DoublesRoller()
+        {
+            //Die die1, die2;
+
+
+            //die1 = new Die();
+            ////System.Threading.Thread.Sleep(10);
+            //die2 = new Die();
+
+            Console.WriteLine("Let's see if you have doubles");
+            //while (die1 == die2)
+            //    Console.WriteLine("Doubles!");
+
+            //die1.DrawDie();
+            //die2.DrawDie();
+
+
+
+
 
         }
         public static void Prompter()
@@ -64,7 +94,7 @@ namespace Topic_6_loops
             Console.Write($"Choose a number between {min} & {max}:  ");
             while (!int.TryParse(Console.ReadLine(), out userInput) || (userInput > max || userInput < min))
                 Console.WriteLine("Invalid number, try again");
-            
+
             Console.WriteLine("Thank you");
 
             Console.ReadLine();
@@ -73,7 +103,7 @@ namespace Topic_6_loops
         public static void BankOfBlorb()
         {
             string bankchoice;
-            double balance = 150, depositAmount, transactionfee = 0.75, withdrawalAmount;
+            double balance = 150, depositAmount, transactionfee = 0.75, withdrawalAmount, billAmount;
 
 
             Console.WriteLine("You chose option 2");
@@ -115,44 +145,101 @@ namespace Topic_6_loops
                     Console.WriteLine("Thank you for using BOB bank. Hit Enter to return back to menu");
                     Console.ReadLine();
                     Console.Clear();
-                    
+
                 }
-                
+
                 // Add an else if for each valid choice...
                 else if (bankchoice == "withdrawal")
                 {
-                   
+                    balance -= transactionfee;
                     {
                         Console.WriteLine("Enter the amount you wish to withdraw");
-                        while (!double.TryParse(Console.ReadLine(), out withdrawalAmount) && withdrawalAmount > 0)
+                        if (!double.TryParse(Console.ReadLine(), out withdrawalAmount))
                             Console.WriteLine("Invalid number");
-                        if (withdrawalAmount >= 0 && balance >= 150)
-                            withdrawalAmount -= balance;
-                            balance = withdrawalAmount - transactionfee;
+
+                        if (withdrawalAmount < 0 || withdrawalAmount > balance)
+                        {
+                            Console.WriteLine("That is an invalid withdrawal amount");
+                            withdrawalAmount = 0;
+                        }
+
+                        else
+                        {
+                            balance -= withdrawalAmount;
+                        }
+
                         Console.WriteLine($"Your withdrawal amount {withdrawalAmount:C} and your current balance {balance:C}. ");
                         Console.WriteLine();
                         Console.WriteLine("Thank you for using BOB bank. Hit Enter to return back to menu");
                         Console.ReadLine();
+
+
                         Console.Clear();
-                       
+
                     }
-              
+
+
                 }
+                else if (bankchoice == "bill payment")
+                {
+
+                    balance -= transactionfee;
+
+                    Console.WriteLine("Enter the amount you have to pay for bills");
+                    if (!double.TryParse(Console.ReadLine(), out billAmount))
+                        Console.WriteLine("Invalid number");
+                    if (billAmount < 0 || billAmount > balance)
+                    {
+                        Console.WriteLine("Invalid amount");
+                        billAmount = 0;
+                    }
+                    else
+                    {
+                        billAmount -= balance;
+
+                    }
+
+                    Console.WriteLine($"You paid {billAmount:C} and your current balance is {balance:c}. ");
+                    Console.WriteLine();
+                    Console.WriteLine("Thank you for using BOB bank. Hit Enter to return back to menu");
+                    Console.ReadLine();
+                    Console.Clear();
+
+                }
+                else if (bankchoice == "account balance update")
+                {
+                    Console.WriteLine("Please hit ENTER to check your account balance");
+
+                    Console.ReadLine();
+
+                    balance = balance - transactionfee;
+                    Console.WriteLine();
+                    Console.WriteLine($"Your account balance is: {balance} ");
+                    Console.WriteLine();
+                    Console.WriteLine("Thank you for using BOB bank. Hit Enter to return back to menu");
+                    Console.ReadLine();
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice, press ENTER to continue.");
+                    Console.ReadLine();
+                }
+
+             
+               
+
             }
-        }
 
-        
-        
-            
             
 
+         }
+         
 
-
-
-
-
-
+        
 
         
     }
+    
+
 }
