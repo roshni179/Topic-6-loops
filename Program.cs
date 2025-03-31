@@ -138,26 +138,7 @@ namespace Topic_6_loops
                     }
               
                 }
-            } static void Main()
-            {int rolls = 0
-             while (true)
-        {
-            int die1 = RollDie();
-            int die2 = RollDie();
-            rolls++;
-            
-            DrawDice(die1, die2);
-            Console.WriteLine($"\nRoll {rolls}: {die1} - {die2}");
-
-            if (die1 == die2)
-                break;
-
-            Console.WriteLine("Press ENTER to roll again...");
-            Console.ReadLine();
-            Console.Clear();
-        }
-
-        Console.WriteLine($"\nDoubles rolled! It took {rolls} rolls to get doubles.");
+          
     
              
              
