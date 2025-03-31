@@ -54,23 +54,32 @@ namespace Topic_6_loops
         }
         public static void DoublesRoller()
         {
-            //Die die1, die2;
-
-
-            //die1 = new Die();
-            ////System.Threading.Thread.Sleep(10);
-            //die2 = new Die();
-
+            Die die1, die2;
+            int rolls = 0;
+            
+            Console.WriteLine("Hit ENTER!");
+            Console.Clear();
             Console.WriteLine("Let's see if you have doubles");
-            //while (die1 == die2)
-            //    Console.WriteLine("Doubles!");
-
-            //die1.DrawDie();
-            //die2.DrawDie();
-
-
-
-
+            die1 = new Die();
+            System.Threading.Thread.Sleep(10);
+            die2 = new Die();
+            die1.DrawDie();
+            die2.DrawDie();
+            rolls++;
+          
+            while (die1.Roll != die2.Roll)
+            {
+                die1.RollDie();
+                die2.RollDie();
+                die1.DrawDie();
+                die2.DrawDie();
+                Console.WriteLine("=================");
+            }
+            Console.WriteLine("Doubles!");
+           
+            Console.WriteLine("Press ENTER to continue");
+            Console.ReadLine();
+            
 
         }
         public static void Prompter()
